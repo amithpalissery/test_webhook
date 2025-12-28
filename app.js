@@ -28,8 +28,13 @@ app.get('/webhook', (req, res) => {
 
 // 2. RECEIVE MESSAGES (POST)
 app.post('/webhook', async (req, res) => {
-  // Acknowledge immediately to avoid Meta timeouts
+  // 1. Acknowledge immediately
   res.status(200).send('EVENT_RECEIVED');
+
+  // 2. LOG EVERYTHING (The "Blind" Check)
+  console.log("---- INCOMING WEBHOOK RAW BODY ----");
+  console.log(JSON.stringify(req.body, null, 2)); 
+  console.log("-----------------------------------");
 
   const body = req.body;
 
