@@ -5,6 +5,11 @@ require('dotenv').config(); // Load .env file
 const app = express();
 app.use(express.json());
 
+// --- ADD THIS X-RAY LOGGER ---
+app.use((req, res, next) => {
+  console.log(`[X-RAY] Incoming Request: ${req.method} ${req.path}`);
+  next();
+});
 // CONFIGURATION
 const port = process.env.PORT || 3000;
 const verifyToken = process.env.VERIFY_TOKEN;
